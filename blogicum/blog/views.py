@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from typing import Union
 
-posts:list[dict[str, Union[int, str]]] = [
+posts: list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -45,6 +45,7 @@ posts:list[dict[str, Union[int, str]]] = [
     },
 ]
 post = {0: posts[0], 1: posts[1], 2: posts[2]}
+
 
 def index(request):
     context = {'posts': posts}
