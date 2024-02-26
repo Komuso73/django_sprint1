@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-posts = [
+from typing import Union
+
+posts:list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -42,21 +44,21 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
-
+post = {0: posts[0], 1: posts[1], 2: posts[2]}
 
 def index(request):
-    template = 'blog/index.html'
-    context = {'index': reversed(posts)}
-    return render(request, template, context)
+    context = {'posts': posts}
+    return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, post_id):
-    template = 'blog/detail.html'
-    context = {'post': posts[post_id]}
-    return render(request, template, context)
+    try:
+        context = {'post': post[post_id]}
+        return render(request, 'blog/detail.html', context)
+    except KeyError:
+        return render(request, 'blog/error.html')
 
 
 def category_posts(request, category):
-    template = 'blog/category.html'
     context = {'category': category}
-    return render(request, template, context)
+    return render(request, 'blog/category.html', context)

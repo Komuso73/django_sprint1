@@ -10,7 +10,7 @@
     <hr>
     <article>
       <ul>
-        {% for post in index %}
+        {% for post in posts reversed %}
           <li>
             Место: {{ post.location }}                
           </li>
@@ -18,7 +18,9 @@
             Дата: {{ post.date }}  
           </li>
           <li>
-            Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
+            Категория: <a href=
+            "{% url 'blog:category_posts' post.category %}">
+              {{ post.category }}</a>
           </li>
       </ul>          
       <!-- Первые 10 слов -->
