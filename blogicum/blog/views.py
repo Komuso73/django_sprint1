@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import Http404
 from typing import Union
 
 posts: list[dict[str, Union[int, str]]] = [
@@ -44,22 +44,20 @@ posts: list[dict[str, Union[int, str]]] = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
-post = {0: posts[0], 1: posts[1], 2: posts[2]}
+posts_id = {value: posts[value] for post in posts for key,
+            value in post.items() if key == 'id' and type(value) == int}
 
 
 def index(request):
-    context = {'posts': posts}
-    return render(request, 'blog/index.html', context)
+    return render(request, 'blog/index.html', {'posts': posts})
 
 
 def post_detail(request, post_id):
     try:
-        context = {'post': post[post_id]}
-        return render(request, 'blog/detail.html', context)
+        return render(request, 'blog/detail.html', {'post': posts_id[post_id]})
     except KeyError:
-        return render(request, 'blog/error.html')
+        raise Http404("Недопустимый ключ продукта.")
 
 
 def category_posts(request, category):
-    context = {'category': category}
-    return render(request, 'blog/category.html', context)
+    return render(request, 'blog/category.html', {'category': category})

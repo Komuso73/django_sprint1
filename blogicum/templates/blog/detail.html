@@ -1,25 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>{{ post.location }}. {{ post.date }}</title>
+  {{ post.location }}. {{ post.date }}
 {% endblock %}
 {% block content %}
     <div class="container py-5">
-      <article>
-        <ul>
-          <li>
-            Место: {{ post.location }}                
-          </li>
-          <li>
-            Дата: {{ post.date }}  
-          </li>
-          <li>
-            Категория: <a href="{{ post.category }}">{{ post.category }}</a>
-          </li>
-        </ul>         
-        <p>
-          {{ post.text|linebreaksbr }}
-        </p>          
+      {% include "includes/middle.html" %}
+      {{ post.text|linebreaksbr }}         
       </article>                
     </div>
 {% endblock %}
