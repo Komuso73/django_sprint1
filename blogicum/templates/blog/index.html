@@ -8,11 +8,11 @@
     <h1>Лента записей</h1>                        
     <hr>
     {% for post in posts reversed %}
-    {% include "includes/middle.html" %}
-      <a href="{% url 'blog:post_detail' post.id %} ">Читать полный текст</a>
-      {% if not forloop.last %}
-        <hr>
-      {% endif %}
-      {% endfor %}
+      {% include "includes/middle.html" %}
+        <a href="{% url 'blog:post_detail' post.id %} ">Читать полный текст</a>
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+    {% endfor %}
   </div>
 {% endblock %}

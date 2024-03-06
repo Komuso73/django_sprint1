@@ -4,9 +4,7 @@
   {{ post.location }}. {{ post.date }}
 {% endblock %}
 {% block content %}
-    <div class="container py-5">
-      {% include "includes/middle.html" %}
-      {{ post.text|linebreaksbr }}         
-      </article>                
-    </div>
+  <div class="container py-5">
+    {% include "includes/middle.html" %}                     
+  </div>
 {% endblock %}
